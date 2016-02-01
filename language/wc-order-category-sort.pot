@@ -1,0 +1,76 @@
+# Copyright (C) 2016 WC Order Category Sort
+# This file is distributed under the same license as the WC Order Category Sort package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WC Order Category Sort 1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wc-order-category-sort\n"
+"POT-Creation-Date: 2016-02-01 05:09:06+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: includes/admin/class-admin-init.php:89
+msgid "Report Issue"
+msgstr ""
+
+#: includes/admin/class-admin-init.php:90
+msgid "Contact Author"
+msgstr ""
+
+#: includes/admin/class-settings.php:38 includes/admin/class-settings.php:66
+msgid "WC Order Category Sort"
+msgstr ""
+
+#: includes/admin/class-settings.php:68
+msgid "The following options are used to configure WC Order Category Sort"
+msgstr ""
+
+#: includes/admin/class-settings.php:72
+msgid "Category List"
+msgstr ""
+
+#: includes/admin/class-settings.php:73
+msgid "This will automatically insert your slider into the single product page"
+msgstr ""
+
+#: includes/admin/class-settings.php:79
+msgid "Select Categories To Order It"
+msgstr ""
+
+#: includes/admin/class-settings.php:93
+msgid "Category Sort"
+msgstr ""
+
+#: includes/admin/class-settings.php:101
+msgid "Term ID"
+msgstr ""
+
+#: includes/admin/class-settings.php:102
+msgid "Category Name"
+msgstr ""
+
+#: includes/admin/class-settings.php:103
+msgid "Category Slug"
+msgstr ""
+#. Plugin Name of the plugin/theme
+msgid "WC Order Category Sort"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/technofreaky/wc-order-category-sort"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Sort Products Based On Category In Orders"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Varun Sridharan"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://varunsridharan.in"
+msgstr ""
