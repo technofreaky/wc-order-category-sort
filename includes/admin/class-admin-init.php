@@ -17,6 +17,7 @@ class WC_Order_Category_Sort_Admin extends WC_Order_Category_Sort {
         add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles' ),99);
         add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
         add_action( 'admin_init', array( $this, 'admin_init' ));
+		add_action( 'admin_menu', array( $this, 'register_menu'));
 		add_filter( 'plugin_row_meta', array($this, 'plugin_row_links' ), 10, 2 );
 	}
 
@@ -28,6 +29,31 @@ class WC_Order_Category_Sort_Admin extends WC_Order_Category_Sort {
     }
  
     
+	public function register_menu(){
+		add_submenu_page(
+		'edit.php?post_type=product',
+		__('Product Shelf Listing',WCOCS_TXT),
+		__('Product Shelf Listing',WCOCS_TXT),
+		'manage_woocommerce',
+		'product-shelf-listing',
+		array( $this,'product_listing') );
+	}
+	
+	public function product_listing(){
+		require_once('product-listing-custom.php');
+		$testListTable = new TT_Example_List_Table();
+		$testListTable->prepare_items();
+    ?>
+		<div class="wrap">
+			<h2>List Table Test</h2>
+			<form id="movies-filter" method="get">
+				<input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
+				<?php $testListTable->display() ?>
+			</form>
+		</div>
+    <?php
+	}
+	
 	/**
 	 * Add a new integration to WooCommerce.
 	 */

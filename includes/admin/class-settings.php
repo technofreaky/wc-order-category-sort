@@ -114,19 +114,6 @@ class WC_Order_Category_Sort_Settings  {
 						<?php
 						$selected_categories = get_option(WCOCS_DB.'selected_category');
 						foreach ($selected_categories as $category ) {
-							
-							$postIDS = get_posts(
-								array( 'posts_per_page' => -1, 'post_type' => 'product', 
-									  'tax_query' => array(
-															array(
-																'taxonomy' => 'product_shelf',
-																'field' => 'term_id',
-																'terms' => $category,
-															)
-													)
-										)
-							);
-							//var_dump(count($postIDS));
 							echo '<tr>';
 							$current_term = get_term($category,'product_shelf');
 							if($current_term == null){continue;}
@@ -161,8 +148,6 @@ class WC_Order_Category_Sort_Settings  {
 							}
 							
 							echo '</tr>';
-							 
-							unset($postIDS);
 						}
 						?>
 					</tbody>
