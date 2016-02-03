@@ -41,6 +41,7 @@ class WC_Order_Category_Sort_Admin extends WC_Order_Category_Sort {
 	
 	public function product_listing(){
 		require_once('product-listing-custom.php');
+		add_thickbox(); 
 		$testListTable = new TT_Example_List_Table();
 		$testListTable->prepare_items();
     ?>

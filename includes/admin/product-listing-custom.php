@@ -122,8 +122,12 @@ class TT_Example_List_Table extends WP_List_Table {
 
 
     function column_name($item){
-		
-        $actions = array( 'view' => sprintf('<a href="%s">'.__('View').'</a>',$item['view_link']), 'edit' => sprintf('<a href="%s" style="color:red;">'.__('Edit').'</a>',$item['edit_link']), );       
+		$ajaxURL = admin_url('admin-ajax.php?action=wcordersortchangeshelf&productid='.$item['ID']).'&TB_iframe=true&width=600&height=250';
+        $actions = array( 
+			'view' => sprintf('<a href="%s">'.__('View').'</a>',$item['view_link']), 
+			'edit' => sprintf('<a href="%s" style="color:red;">'.__('Edit').'</a>',$item['edit_link']), 
+			'changeshelf' => sprintf('<a href="%s" class="thickbox">'.__('Change Shelf').'</a>',$ajaxURL),
+		);       
 
 		return sprintf('%1$s <span style="color:silver">(SKU:%2$s)</span>%3$s',
             /*$1%s*/ '<a href="'.$item['view_link'].'"> '.$item['title'].'</a>',
