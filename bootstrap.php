@@ -30,8 +30,47 @@ class WC_Order_Category_Sort {
         $this->init_class();
         add_action('plugins_loaded', array( $this, 'after_plugins_loaded' ));
         add_filter('load_textdomain_mofile',  array( $this, 'load_plugin_mo_files' ), 10, 2);
+		add_action( 'init', array($this,'register_product_shelf'),0);
     }
     
+				   
+	public function register_product_shelf() {
+
+		$labels = array(
+			'name'                       => _x( 'Product Shelf\'s', 'Taxonomy General Name', WCOCS_TXT),
+			'singular_name'              => _x( 'Product Shelf', 'Taxonomy Singular Name', WCOCS_TXT),
+			'menu_name'                  => __( 'Shelf', WCOCS_TXT),
+			'all_items'                  => __( 'All Shelf', WCOCS_TXT),
+			'parent_item'                => __( 'Parent Shelf', WCOCS_TXT),
+			'parent_item_colon'          => __( 'Parent Shelf:', WCOCS_TXT),
+			'new_item_name'              => __( 'New Shelf Name', WCOCS_TXT),
+			'add_new_item'               => __( 'Add New Shelf', WCOCS_TXT),
+			'edit_item'                  => __( 'Edit Shelf', WCOCS_TXT),
+			'update_item'                => __( 'Update Shelf', WCOCS_TXT),
+			'view_item'                  => __( 'View Shelf', WCOCS_TXT),
+			'separate_items_with_commas' => __( 'Separate Shelf\'s with commas', WCOCS_TXT),
+			'add_or_remove_items'        => __( 'Add or remove Shelf\'s', WCOCS_TXT),
+			'choose_from_most_used'      => __( 'Choose from the most used', WCOCS_TXT),
+			'popular_items'              => __( 'Popular Shelf\'s', WCOCS_TXT),
+			'search_items'               => __( 'Search Shelf\'s', WCOCS_TXT),
+			'not_found'                  => __( 'Not Found', WCOCS_TXT),
+			'no_terms'                   => __( 'No Shelf\'s', WCOCS_TXT),
+			'items_list'                 => __( 'Shelf\'s list', WCOCS_TXT),
+			'items_list_navigation'      => __( 'Shelf\'s list navigation', WCOCS_TXT),
+		);
+		$args = array(
+			'labels'           => $labels,
+			'hierarchical'     => true,
+			'public'           => true,
+			'show_ui'          => true,
+			'show_admin_column'=> true,
+			'show_in_nav_menus'=> false,
+			'show_tagcloud'    => false,
+			'rewrite'          => false,
+		);
+		register_taxonomy( 'product_shelf', array( 'product' ), $args );
+
+	}				   
     /**
      * Loads Required Plugins For Plugin
      */

@@ -36,7 +36,7 @@ class WC_Order_Category_Sort_Admin_Fucntions {
 		$returned_sort = array();
 		foreach($product_ids as $productID => $product){
 			$addedTOSORT = false;
-			$cats = wp_get_post_terms( $product, 'product_cat');
+			$cats = wp_get_post_terms( $product, 'product_shelf');
 			foreach($cats as $cat){
 				if(!$addedTOSORT){
 					$sort = array_search($cat->term_id, $cat_order);

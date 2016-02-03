@@ -59,7 +59,7 @@ class WC_Order_Category_Sort_Settings  {
 	function get_settings( $settings, $current_section) {
 		if ( $current_section == 'wcocs' ) {
 			$args = array( 'hide_empty' => false,'fields' => 'id=>name'); 
-			$terms = get_terms('product_cat', $args);
+			$terms = get_terms('product_shelf', $args);
 			
 			$settings_slider = array();
 			$settings_slider[] = array( 
@@ -92,7 +92,7 @@ class WC_Order_Category_Sort_Settings  {
 		<tr valign="top">
 			<th scope="row" class="titledesc"><?php _e( 'Category Sort', WCOCS_TXT ) ?></th>
 			<td class="forminp">
-				<table class="wc_gateways widefat" cellspacing="0" style="width:50%;">
+				<table class="wc_gateways wc_order_category_sort widefat" cellspacing="0" style="width:50%;">
 					<thead>
 						<tr>
 							<?php
@@ -113,12 +113,23 @@ class WC_Order_Category_Sort_Settings  {
 					<tbody>
 						<?php
 						$selected_categories = get_option(WCOCS_DB.'selected_category');
-						 
 						foreach ($selected_categories as $category ) {
-
+							
+							$postIDS = get_posts(
+								array( 'posts_per_page' => -1, 'post_type' => 'product', 
+									  'tax_query' => array(
+															array(
+																'taxonomy' => 'product_shelf',
+																'field' => 'term_id',
+																'terms' => $category,
+															)
+													)
+										)
+							);
+							//var_dump(count($postIDS));
 							echo '<tr>';
-							$current_term = get_term($category,'product_cat');
-			
+							$current_term = get_term($category,'product_shelf');
+							if($current_term == null){continue;}
 							foreach ( $columns as $key => $column ) {
 
 								switch ( $key ) {
@@ -148,8 +159,10 @@ class WC_Order_Category_Sort_Settings  {
 									break;
 								}
 							}
-
+							
 							echo '</tr>';
+							 
+							unset($postIDS);
 						}
 						?>
 					</tbody>
@@ -164,10 +177,10 @@ class WC_Order_Category_Sort_Settings  {
 	 */
 	public function save() {
 		global $current_section;
+		
+		$ordered = isset($_POST[WCOCS_DB.'order_category']) ? $_POST[WCOCS_DB.'order_category'] : array();
+		$source = isset($_POST[ WCOCS_DB.'selected_category' ]) ? $_POST[ WCOCS_DB.'selected_category' ] : array();
 
-		$ordered = $_POST[WCOCS_DB.'order_category'];
-		$source = $_POST[ WCOCS_DB.'selected_category' ];
-		if(empty($ordered)){$ordered = array();}
 		if(!empty($source)){
 			foreach($source as $cats){ if(!in_array($cats,$ordered)){$ordered[] = $cats;} }
 			foreach($ordered as $id=>$cats){ if(!in_array($cats,$source)){unset($ordered[$id]);} }

@@ -52,9 +52,9 @@ class WC_Order_Category_Sort_Admin extends WC_Order_Category_Sort {
 	 * Register the JavaScript for the admin area.
 	 */
 	public function enqueue_scripts() {
-        if(in_array($this->current_screen() , $this->get_screen_ids())) {
+        //if(in_array($this->current_screen() , $this->get_screen_ids())) {
             wp_enqueue_script(WCOCS_SLUG.'_core_script', WCOCS_JS.'script.js', array('jquery'), WCOCS_V, false ); 
-        }
+       // }
  
 	}
     
