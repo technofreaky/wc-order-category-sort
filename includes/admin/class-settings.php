@@ -113,40 +113,48 @@ class WC_Order_Category_Sort_Settings  {
 					<tbody>
 						<?php
 						$selected_categories = get_option(WCOCS_DB.'selected_category');
-						foreach ($selected_categories as $category ) {
-							echo '<tr>';
-							$current_term = get_term($category,'product_shelf');
-							if($current_term == null){continue;}
-							foreach ( $columns as $key => $column ) {
+						if(!empty($selected_categories)){
+							foreach ($selected_categories as $category ) {
+								echo '<tr>';
+								$current_term = get_term($category,'product_shelf');
+								if($current_term == null){continue;}
+								foreach ( $columns as $key => $column ) {
 
-								switch ( $key ) {
+									switch ( $key ) {
 
-									case 'sort' :
-										echo '<td width="1%" class="sort">
-											<input type="hidden" name="'.WCOCS_DB.'order_category[]" value="'.esc_attr($category).'" />
-										</td>';
-									break;
+										case 'sort' :
+											echo '<td width="1%" class="sort">
+												<input type="hidden" name="'.WCOCS_DB.'order_category[]" value="'.esc_attr($category).'" />
+											</td>';
+										break;
 
-									case 'term_id' :
-										echo '<td class="name">
-											<a href="#">' . esc_html( $current_term->term_id ) . '</a>
-										</td>';
-									break;
+										case 'term_id' :
+											echo '<td class="name">
+												<a href="#">' . esc_html( $current_term->term_id ) . '</a>
+											</td>';
+										break;
 
-									case 'name' :
-										echo '<td class="name">' . esc_html( $current_term->name ) . '</td>';
-									break;
-									case 'slug' :
-										echo '<td class="name">' . esc_html( $current_term->slug ) . '</td>';
-									break;
-									 
+										case 'name' :
+											echo '<td class="name">' . esc_html( $current_term->name ) . '</td>';
+										break;
+										case 'slug' :
+											echo '<td class="name">' . esc_html( $current_term->slug ) . '</td>';
+										break;
 
-									default :
-									
-									break;
+
+										default :
+
+										break;
+									}
 								}
+
+								echo '</tr>';
 							}
-							
+						} else {
+							echo '<tr>';
+								echo '<td colspan="4" >';
+									echo '<p>'.__("No Shelf Selected",WCOCS_TXT).'</p>';
+								echo '</td>';
 							echo '</tr>';
 						}
 						?>

@@ -92,19 +92,23 @@ class WC_Order_Category_Sort_Admin_Fucntions {
 	
 	public function get_ordered_products($cat_order,$product_ids){
 		$returned_sort = array();
+		$unsorted = array();
 		foreach($product_ids as $productID => $product){
 			$addedTOSORT = false;
 			$cats = wp_get_post_terms( $product, 'product_shelf');
+			if(empty($cats)){
+				$unsorted[9999][] = $productID;
+			}
 			foreach($cats as $cat){
 				if(!$addedTOSORT){
 					$sort = array_search($cat->term_id, $cat_order);
 					$returned_sort[$sort][] = $productID;
 					$addedTOSORT = true;
 				}
-				
-				 
 			}
 		}
+		
+		$returned_sort = array_merge($returned_sort,$unsorted);
 		ksort($returned_sort);
 		return $returned_sort;
 	}
@@ -119,6 +123,7 @@ class WC_Order_Category_Sort_Admin_Fucntions {
 				}
 			}
 		}
+
 		return $gitems;
 	}
 	
